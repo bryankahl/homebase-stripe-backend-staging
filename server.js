@@ -26,15 +26,18 @@ app.use((req, res, next) => {
   next();
 });
 
-// ✅ JSON body parsing
+// ✅ Raw body parser ONLY for Stripe webhook
+app.post("/webhook", bodyParser.raw({ type: "application/json" }));
+
+// ✅ JSON parser for everything else
 app.use(bodyParser.json());
 
-// ✅ Health check route
+// ✅ Health check
 app.get("/", (req, res) => {
   res.send("🔥 Homebase AI backend is running.");
 });
 
-// ✅ Stripe Checkout session creation
+// ✅ Create Stripe checkout session
 app.post("/create-checkout-session", async (req, res) => {
   const idToken = req.headers.authorization?.split("Bearer ")[1];
   if (!idToken) return res.status(401).json({ error: "Missing token" });
@@ -61,10 +64,11 @@ app.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-// ✅ Webhook endpoint (RAW parsing only here!)
-app.post("/webhook", bodyParser.raw({ type: "application/json" }), (req, res) => {
+// ✅ Stripe webhook route
+app.post("/webhook", (req, res) => {
   const sig = req.headers["stripe-signature"];
   let event;
+
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
   } catch (err) {
@@ -75,7 +79,10 @@ app.post("/webhook", bodyParser.raw({ type: "application/json" }), (req, res) =>
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
     const uid = session.metadata.uid;
-    db.collection("businesses").doc(uid).set({ isActive: true }, { merge: true })
+
+    db.collection("businesses")
+      .doc(uid)
+      .set({ isActive: true }, { merge: true })
       .then(() => console.log(`✅ Activated user ${uid}`))
       .catch(err => console.error(`❌ Failed to activate user ${uid}`, err));
   }
@@ -86,5 +93,3 @@ app.post("/webhook", bodyParser.raw({ type: "application/json" }), (req, res) =>
 // ✅ Start server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-
-// trigger rebuild
