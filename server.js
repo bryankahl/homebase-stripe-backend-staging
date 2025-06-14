@@ -45,15 +45,29 @@ app.post("/create-checkout-session", async (req, res) => {
     const uid = decoded.uid;
     const email = decoded.email;
 
+    let customer;
+
+    // Check if the user already has a Stripe customer
+    const customers = await stripe.customers.list({ email });
+    if (customers.data.length > 0) {
+      customer = customers.data[0];
+    } else {
+      customer = await stripe.customers.create({
+        email,
+        metadata: { uid }
+      });
+    }
+
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       payment_method_types: ["card"],
       line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
-      customer_email: email,
+      customer: customer.id, // ✅ use customer instead of customer_email
       metadata: { uid },
       success_url: process.env.SUCCESS_URL,
       cancel_url: process.env.CANCEL_URL,
     });
+
 
     res.json({ url: session.url });
   } catch (err) {
