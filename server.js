@@ -10,7 +10,7 @@ const stripe = stripeModule(process.env.STRIPE_SECRET_KEY);
 const app = express();
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
-// ✅ CORS middleware (FIRST!)
+// ✅ CORS middleware
 const allowedOrigins = ["https://ai-agent-demo-9fe52.web.app"];
 app.use((req, res, next) => {
   const origin = req.headers.origin;
@@ -24,10 +24,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// ✅ Raw parser only for Stripe webhook
+// ✅ Raw webhook parser (ONLY for /webhook)
 app.post("/webhook", bodyParser.raw({ type: "application/json" }));
 
-// ✅ JSON parser for everything else
+// ✅ Standard JSON parser for all other routes
 app.use(bodyParser.json());
 
 // ✅ Health check
@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
   res.send("🔥 Homebase AI backend is running.");
 });
 
-// ✅ Create Stripe checkout session
+// ✅ Create Stripe Checkout session
 app.post("/create-checkout-session", async (req, res) => {
   const idToken = req.headers.authorization?.split("Bearer ")[1];
   if (!idToken) return res.status(401).json({ error: "Missing token" });
@@ -62,7 +62,7 @@ app.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-// ✅ Billing portal session using stored Stripe customer ID
+// ✅ Create Billing Portal session using stored customer ID
 app.post("/create-billing-portal-session", async (req, res) => {
   const idToken = req.headers.authorization?.split("Bearer ")[1];
   if (!idToken) return res.status(401).json({ error: "Missing token" });
@@ -90,7 +90,7 @@ app.post("/create-billing-portal-session", async (req, res) => {
   }
 });
 
-// ✅ Webhook to activate account and save customer ID
+// ✅ Webhook route to handle Stripe events
 app.post("/webhook", (req, res) => {
   const sig = req.headers["stripe-signature"];
   let event;
