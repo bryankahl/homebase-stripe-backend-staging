@@ -64,6 +64,32 @@ app.post("/create-checkout-session", async (req, res) => {
   }
 });
 
+app.post("/create-billing-portal-session", async (req, res) => {
+  const idToken = req.headers.authorization?.split("Bearer ")[1];
+  if (!idToken) return res.status(401).json({ error: "Missing token" });
+
+  try {
+    const decoded = await admin.auth().verifyIdToken(idToken);
+    const uid = decoded.uid;
+    const email = decoded.email;
+
+    // Look up the customer by email (or store the Stripe customer ID in Firestore if you want to be more robust)
+    const customers = await stripe.customers.list({ email });
+    if (!customers.data.length) throw new Error("Customer not found");
+
+    const portalSession = await stripe.billingPortal.sessions.create({
+      customer: customers.data[0].id,
+      return_url: process.env.SUCCESS_URL
+    });
+
+    res.json({ url: portalSession.url });
+  } catch (err) {
+    console.error("❌ Billing portal error:", err);
+    res.status(500).json({ error: "Failed to create billing portal session" });
+  }
+});
+
+
 // ✅ Stripe webhook route
 app.post("/webhook", (req, res) => {
   const sig = req.headers["stripe-signature"];
