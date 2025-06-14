@@ -1,5 +1,3 @@
-// server.js
-
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -26,7 +24,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// ✅ Raw body parser ONLY for Stripe webhook
+// ✅ Raw parser only for Stripe webhook
 app.post("/webhook", bodyParser.raw({ type: "application/json" }));
 
 // ✅ JSON parser for everything else
@@ -64,6 +62,7 @@ app.post("/create-checkout-session", async (req, res) => {
   }
 });
 
+// ✅ Billing portal session using stored Stripe customer ID
 app.post("/create-billing-portal-session", async (req, res) => {
   const idToken = req.headers.authorization?.split("Bearer ")[1];
   if (!idToken) return res.status(401).json({ error: "Missing token" });
@@ -71,15 +70,17 @@ app.post("/create-billing-portal-session", async (req, res) => {
   try {
     const decoded = await admin.auth().verifyIdToken(idToken);
     const uid = decoded.uid;
-    const email = decoded.email;
 
-    // Look up the customer by email (or store the Stripe customer ID in Firestore if you want to be more robust)
-    const customers = await stripe.customers.list({ email });
-    if (!customers.data.length) throw new Error("Customer not found");
+    const bizSnap = await db.collection("businesses").doc(uid).get();
+    const data = bizSnap.data();
+
+    if (!data?.stripeCustomerId) {
+      throw new Error("No Stripe customer ID found");
+    }
 
     const portalSession = await stripe.billingPortal.sessions.create({
-      customer: customers.data[0].id,
-      return_url: process.env.SUCCESS_URL
+      customer: data.stripeCustomerId,
+      return_url: process.env.SUCCESS_URL,
     });
 
     res.json({ url: portalSession.url });
@@ -89,8 +90,7 @@ app.post("/create-billing-portal-session", async (req, res) => {
   }
 });
 
-
-// ✅ Stripe webhook route
+// ✅ Webhook to activate account and save customer ID
 app.post("/webhook", (req, res) => {
   const sig = req.headers["stripe-signature"];
   let event;
@@ -105,10 +105,11 @@ app.post("/webhook", (req, res) => {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
     const uid = session.metadata.uid;
+    const customerId = session.customer;
 
     db.collection("businesses")
       .doc(uid)
-      .set({ isActive: true }, { merge: true })
+      .set({ isActive: true, stripeCustomerId: customerId }, { merge: true })
       .then(() => console.log(`✅ Activated user ${uid}`))
       .catch(err => console.error(`❌ Failed to activate user ${uid}`, err));
   }
