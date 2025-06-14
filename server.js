@@ -125,6 +125,41 @@ app.post("/webhook", (req, res) => {
       .catch(err => console.error(`❌ Failed to activate user ${uid}`, err));
   }
 
+  if (event.type === "customer.subscription.deleted") {
+    const subscription = event.data.object;
+    const customerId = subscription.customer;
+  
+    const bizRef = db.collection("businesses");
+    bizRef
+      .where("stripeCustomerId", "==", customerId)
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          doc.ref.set({ isActive: false }, { merge: true });
+          console.log(`🚫 Deactivated user ${doc.id} after subscription cancellation`);
+        });
+      })
+      .catch(err => console.error("❌ Error updating isActive:", err));
+  }
+  
+  if (event.type === "invoice.payment_failed") {
+    const invoice = event.data.object;
+    const customerId = invoice.customer;
+  
+    const bizRef = db.collection("businesses");
+    bizRef
+      .where("stripeCustomerId", "==", customerId)
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          doc.ref.set({ isActive: false }, { merge: true });
+          console.log(`🚫 Deactivated user ${doc.id} after payment failure`);
+        });
+      })
+      .catch(err => console.error("❌ Error updating isActive:", err));
+  }
+  
+
   res.status(200).send("OK");
 });
 
