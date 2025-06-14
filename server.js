@@ -24,10 +24,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// ✅ Raw webhook parser (ONLY for /webhook)
+// ✅ Raw body parser ONLY for /webhook
 app.post("/webhook", bodyParser.raw({ type: "application/json" }));
 
-// ✅ Standard JSON parser for all other routes
+// ✅ JSON body parser for all other routes
 app.use(bodyParser.json());
 
 // ✅ Health check
@@ -47,27 +47,22 @@ app.post("/create-checkout-session", async (req, res) => {
 
     let customer;
 
-    // Check if the user already has a Stripe customer
     const customers = await stripe.customers.list({ email });
     if (customers.data.length > 0) {
       customer = customers.data[0];
     } else {
-      customer = await stripe.customers.create({
-        email,
-        metadata: { uid }
-      });
+      customer = await stripe.customers.create({ email, metadata: { uid } });
     }
 
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       payment_method_types: ["card"],
       line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
-      customer: customer.id, // ✅ use customer instead of customer_email
+      customer: customer.id,
       metadata: { uid },
       success_url: process.env.SUCCESS_URL,
       cancel_url: process.env.CANCEL_URL,
     });
-
 
     res.json({ url: session.url });
   } catch (err) {
@@ -76,7 +71,7 @@ app.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-// ✅ Create Billing Portal session using stored customer ID
+// ✅ Create Billing Portal session
 app.post("/create-billing-portal-session", async (req, res) => {
   const idToken = req.headers.authorization?.split("Bearer ")[1];
   if (!idToken) return res.status(401).json({ error: "Missing token" });
@@ -92,6 +87,8 @@ app.post("/create-billing-portal-session", async (req, res) => {
       throw new Error("No Stripe customer ID found");
     }
 
+    console.log("🔍 Using Stripe customer ID:", data.stripeCustomerId);
+
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: data.stripeCustomerId,
       return_url: process.env.SUCCESS_URL,
@@ -104,7 +101,7 @@ app.post("/create-billing-portal-session", async (req, res) => {
   }
 });
 
-// ✅ Webhook route to handle Stripe events
+// ✅ Stripe Webhook
 app.post("/webhook", (req, res) => {
   const sig = req.headers["stripe-signature"];
   let event;
@@ -131,6 +128,6 @@ app.post("/webhook", (req, res) => {
   res.status(200).send("OK");
 });
 
-// ✅ Start server
+// ✅ Start Server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
