@@ -57,12 +57,21 @@ app.post("/create-checkout-session", async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       payment_method_types: ["card"],
-      line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
+      line_items: [
+        {
+          price: process.env.STRIPE_PRICE_ID,
+          quantity: 1
+        }
+      ],
       customer: customer.id,
       metadata: { uid },
       success_url: process.env.SUCCESS_URL,
       cancel_url: process.env.CANCEL_URL,
+      subscription_data: {
+        trial_period_days: 30
+      }
     });
+    
 
     res.json({ url: session.url });
   } catch (err) {
