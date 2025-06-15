@@ -172,6 +172,46 @@ app.post("/webhook", (req, res) => {
   res.status(200).send("OK");
 });
 
+// ✅ Secure GPT endpoint
+app.post("/ask-agent", async (req, res) => {
+  const idToken = req.headers.authorization?.split("Bearer ")[1];
+  if (!idToken) return res.status(401).json({ error: "Missing token" });
+
+  try {
+    const decoded = await admin.auth().verifyIdToken(idToken);
+    const uid = decoded.uid;
+    const { bizId, messages } = req.body;
+
+    // 🔐 Optional: Verify business is active
+    const bizSnap = await db.collection("businesses").doc(bizId).get();
+    if (!bizSnap.exists || bizSnap.data().isActive !== true) {
+      return res.status(403).json({ error: "Unauthorized or inactive business" });
+    }
+
+    const openaiRes = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo",
+        messages,
+        temperature: 0.7
+      })
+    });
+
+    const data = await openaiRes.json();
+    const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn’t respond.";
+    return res.json({ message: reply });
+
+  } catch (err) {
+    console.error("❌ GPT error:", err);
+    return res.status(500).json({ error: "Failed to process request" });
+  }
+});
+
+
 // ✅ Start Server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
