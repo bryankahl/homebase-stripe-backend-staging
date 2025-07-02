@@ -69,8 +69,8 @@ app.post("/create-checkout-session", async (req, res) => {
       ],
       customer: customer.id,
       metadata: { uid },
-      success_url: process.env.SUCCESS_URL,
-      cancel_url: process.env.CANCEL_URL,
+      success_url: req.body.success_url, 
+      cancel_url: req.body.cancel_url,   
       subscription_data: {
         trial_period_days: 30
       }
@@ -104,7 +104,7 @@ app.post("/create-billing-portal-session", async (req, res) => {
 
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: data.stripeCustomerId,
-      return_url: process.env.SUCCESS_URL,
+      return_url: req.body.success_url,
     });
 
     res.json({ url: portalSession.url });
