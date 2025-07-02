@@ -104,8 +104,8 @@ app.post("/create-billing-portal-session", async (req, res) => {
 
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: data.stripeCustomerId,
-      return_url: req.body.success_url,
-    });
+      return_url: req.body.success_url || "https://nestorai.app/dashboard.html" // fallback just in case
+    });    
 
     res.json({ url: portalSession.url });
   } catch (err) {
