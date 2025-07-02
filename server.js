@@ -12,7 +12,6 @@ const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 // ✅ CORS middleware
 const allowedOrigins = [
-  "https://ai-agent-demo-9fe52.web.app",  // keep for testing
   "https://nestorai.app",
   "https://www.nestorai.app"
 ];
