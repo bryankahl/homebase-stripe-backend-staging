@@ -188,7 +188,23 @@ app.post("/webhook", (req, res) => {
 // ✅ Secure AI Chat Route
 app.post("/api/ai-chat", async (req, res) => {
   try {
-    const prompt = req.body.prompt;  // ✅ REMOVE auth checks here
+    const { prompt, biz } = req.body;
+
+    const systemPrompt = `
+You are an emotionally intelligent AI assistant for a small business embedded on their website.
+
+Business Info:
+- Name: ${biz.name}
+- Services: ${biz.services}
+- Hours: ${biz.hours}
+- Pricing: ${biz.pricing}
+- Phone: ${biz.phone}
+- Email: ${biz.email}
+- Location Areas: ${biz.areas}
+
+Custom Tone (from the business owner):
+"${biz.customInstructions || "Friendly, casual, and helpful."}"
+`;
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -199,7 +215,7 @@ app.post("/api/ai-chat", async (req, res) => {
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
         messages: [
-          { role: "system", content: "You are a helpful, friendly assistant. Keep responses clear and concise." },
+          { role: "system", content: systemPrompt },
           { role: "user", content: prompt }
         ],
         temperature: 0.7
@@ -208,6 +224,7 @@ app.post("/api/ai-chat", async (req, res) => {
 
     const data = await response.json();
     const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't process that.";
+
     res.json({ reply });
   } catch (err) {
     console.error("❌ AI Chat Error:", err);
