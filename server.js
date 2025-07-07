@@ -179,12 +179,8 @@ app.post("/webhook", (req, res) => {
 
 // ✅ Secure AI Chat Route
 app.post("/api/ai-chat", async (req, res) => {
-  const idToken = req.headers.authorization?.split("Bearer ")[1];
-  if (!idToken) return res.status(401).json({ error: "Missing token" });
-
   try {
-    const decoded = await admin.auth().verifyIdToken(idToken);
-    const prompt = req.body.prompt;
+    const prompt = req.body.prompt;  // ✅ REMOVE auth checks here
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -204,13 +200,13 @@ app.post("/api/ai-chat", async (req, res) => {
 
     const data = await response.json();
     const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't process that.";
-
     res.json({ reply });
   } catch (err) {
     console.error("❌ AI Chat Error:", err);
     res.status(500).json({ error: "AI Chat failed" });
   }
 });
+
 
 // ✅ Start Server
 const PORT = process.env.PORT || 8080;
