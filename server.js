@@ -12,6 +12,7 @@ const app = express();
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 // ✅ CORS middleware
+// Global CORS for dashboard routes (lock it down here)
 const allowedOrigins = [
   "https://nestorai.app",
   "https://www.nestorai.app"
@@ -19,15 +20,22 @@ const allowedOrigins = [
 
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
+
+  // Allow all origins for the public agent chat API route ONLY
+  if (req.path.startsWith("/api/ai-chat")) {
+    res.setHeader("Access-Control-Allow-Origin", origin || "*");
+  } else if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
+
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.setHeader("Access-Control-Allow-Credentials", "true");
+
   if (req.method === "OPTIONS") return res.sendStatus(200);
   next();
 });
+
 
 // ✅ Raw body parser ONLY for /webhook
 app.post("/webhook", bodyParser.raw({ type: "application/json" }));
