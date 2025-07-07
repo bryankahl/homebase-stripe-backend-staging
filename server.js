@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import stripeModule from "stripe";
 import { admin, db } from "./firebase-admin.js";
+import fetch from "node-fetch"; 
 
 dotenv.config();
 const stripe = stripeModule(process.env.STRIPE_SECRET_KEY);
@@ -174,6 +175,41 @@ app.post("/webhook", (req, res) => {
   
 
   res.status(200).send("OK");
+});
+
+// ✅ Secure AI Chat Route
+app.post("/api/ai-chat", async (req, res) => {
+  const idToken = req.headers.authorization?.split("Bearer ")[1];
+  if (!idToken) return res.status(401).json({ error: "Missing token" });
+
+  try {
+    const decoded = await admin.auth().verifyIdToken(idToken);
+    const prompt = req.body.prompt;
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo",
+        messages: [
+          { role: "system", content: "You are a helpful, friendly assistant. Keep responses clear and concise." },
+          { role: "user", content: prompt }
+        ],
+        temperature: 0.7
+      })
+    });
+
+    const data = await response.json();
+    const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't process that.";
+
+    res.json({ reply });
+  } catch (err) {
+    console.error("❌ AI Chat Error:", err);
+    res.status(500).json({ error: "AI Chat failed" });
+  }
 });
 
 // ✅ Start Server

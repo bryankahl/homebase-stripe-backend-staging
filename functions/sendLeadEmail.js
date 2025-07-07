@@ -1,83 +1,133 @@
+// functions/sendLeadEmail.js
 import { onDocumentCreated } from "firebase-functions/v2/firestore";
 import { defineSecret } from "firebase-functions/params";
 import { initializeApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
-import nodemailer from "nodemailer";
-import { google } from "googleapis";
+import fetch from "node-fetch";
 import * as logger from "firebase-functions/logger";
 
-// Initialize Admin SDK
+// Firebase Admin
 initializeApp();
 const db = getFirestore();
 
-// Define secrets
-export const CLIENT_ID = defineSecret("GMAIL_CLIENT_ID");
-export const CLIENT_SECRET = defineSecret("GMAIL_CLIENT_SECRET");
-export const REFRESH_TOKEN = defineSecret("GMAIL_REFRESH_TOKEN");
-export const GMAIL_USER = defineSecret("GMAIL_USER_EMAIL");
+// Define Resend API Key secret
+export const RESEND_API_KEY = defineSecret("RESEND_API_KEY");
 
 export const sendLeadEmail = onDocumentCreated(
   {
-    document: "businesses/{bizId}/leadForms/{formId}/leads/{leadId}",
+    document: "businesses/{businessId}/leads/{leadId}",
+    secrets: [RESEND_API_KEY],
     region: "us-central1",
-    secrets: [CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN, GMAIL_USER],
   },
   async (event) => {
-    const { bizId } = event.params;
-    const leadData = event.data?.data?.();
+    const { businessId, leadId } = event.params;
+    logger.info(`📄 New Lead Triggered: businessId=${businessId}, leadId=${leadId}`);
 
-    if (!leadData) {
+    // Log the full event data for safety
+    logger.info("🔥 event.data:", JSON.stringify(event.data));
+
+    const firestoreFields = event.data?._fieldsProto;
+    if (!firestoreFields) {
       logger.error("❌ No lead data found or payload malformed.");
       return;
     }
 
+    // Extract formId from Firestore fields (if present)
+    const formIdField = firestoreFields?.formId;
+    const formId =
+      formIdField?.stringValue ||
+      formIdField?.integerValue ||
+      formIdField?.doubleValue ||
+      formIdField?.booleanValue ||
+      null;
+
+    let displayName = "Unknown Form";
+    if (formId) {
+      try {
+        const formSnap = await db
+          .doc(`businesses/${businessId}/leadForms/${formId}`)
+          .get();
+        if (formSnap.exists) {
+          displayName = formSnap.data()?.displayName || "Unnamed Form";
+        }
+      } catch (err) {
+        logger.error("❌ Failed to fetch form display name:", err);
+      }
+    }
+
+    const emailBody = [];
+
+    for (const [fieldId, val] of Object.entries(firestoreFields)) {
+      if (fieldId === "timestamp" || fieldId === "formId") continue; // Skip timestamp and formId
+
+      // Parse Firestore mapValue containing {label, value}
+      if (val.mapValue && val.mapValue.fields) {
+        const label = val.mapValue.fields.label?.stringValue || fieldId;
+        let value = val.mapValue.fields.value?.stringValue || "";
+
+        // Handle other data types if needed
+        if (!value) {
+          value =
+            val.mapValue.fields.value?.integerValue ||
+            val.mapValue.fields.value?.doubleValue ||
+            val.mapValue.fields.value?.booleanValue ||
+            JSON.stringify(val.mapValue.fields.value);
+        }
+
+        emailBody.push(`<p><strong>${label}:</strong> ${value}</p>`);
+      } else {
+        // Fallback (shouldn't normally happen)
+        const value =
+          val.stringValue ||
+          val.integerValue ||
+          val.doubleValue ||
+          val.booleanValue ||
+          JSON.stringify(val);
+        emailBody.push(`<p><strong>${fieldId}:</strong> ${value}</p>`);
+      }
+    }
+
+    const leadHTML = emailBody.join("");
+
     try {
-      // Fetch business email
-      const bizSnap = await db.doc(`businesses/${bizId}`).get();
+      // Fetch business owner's email
+      const bizSnap = await db.doc(`businesses/${businessId}`).get();
       const bizEmail = bizSnap.data()?.email;
 
       if (!bizEmail) {
-        logger.error(`❌ No email found at /businesses/${bizId}`);
+        logger.error(`❌ No email found at /businesses/${businessId}`);
         return;
       }
 
-      // Format lead fields into HTML
-      const leadHTML = Object.entries(leadData)
-        .map(([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`)
-        .join("");
-
-      // Set up OAuth2 client
-      const oAuth2Client = new google.auth.OAuth2(
-        CLIENT_ID.value(),
-        CLIENT_SECRET.value(),
-        "https://developers.google.com/oauthplayground"
-      );
-      oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN.value() });
-
-      const accessToken = await oAuth2Client.getAccessToken();
-
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          type: "OAuth2",
-          user: GMAIL_USER.value(),
-          clientId: CLIENT_ID.value(),
-          clientSecret: CLIENT_SECRET.value(),
-          refreshToken: REFRESH_TOKEN.value(),
-          accessToken: accessToken.token,
+      // Send via Resend
+      const response = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${RESEND_API_KEY.value()}`,
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          from: "NestorAI <support@nestorai.app>",
+          to: bizEmail,
+          subject: "New Lead Captured via NestorAI",
+          html: `
+          <div style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; font-family: Arial, sans-serif; background-color: #fafafa;">
+            <h2 style="color: #6b1f6a;">You've got a new lead!</h2>
+            <p><span style="font-size: 16px; font-weight: bold; color: #6c0;">Form:</span> ${displayName}</p>
+            ${leadHTML}
+          </div>
+          `,
+        }),
       });
 
-      await transporter.sendMail({
-        from: `NestorAI <${GMAIL_USER.value()}>`,
-        to: bizEmail,
-        subject: "📩 New Lead Captured via NestorAI",
-        html: `<h2>You've got a new lead!</h2>${leadHTML}`,
-      });
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Resend API Error: ${errorText}`);
+      }
 
-      logger.info(`✅ Lead email sent to ${bizEmail}`);
+      logger.info(`✅ Lead email sent via Resend to ${bizEmail}`);
     } catch (err) {
-      logger.error("❌ Error sending lead email:", err);
+      logger.error("❌ Error sending lead email via Resend:", err);
     }
   }
 );
