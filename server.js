@@ -14,8 +14,7 @@ const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 // ✅ CORS middleware
 // Global CORS for dashboard routes (lock it down here)
 const allowedOrigins = [
-  "https://nestorai.app",
-  "https://www.nestorai.app"
+  "https://ai-agent-staging-2f393.web.app"
 ];
 
 app.use((req, res, next) => {
