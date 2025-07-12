@@ -57,35 +57,54 @@ export const sendLeadEmail = onDocumentCreated(
 
     const emailBody = [];
 
-    for (const [fieldId, val] of Object.entries(firestoreFields)) {
-      if (fieldId === "timestamp" || fieldId === "formId") continue; // Skip timestamp and formId
+for (const [fieldId, val] of Object.entries(firestoreFields)) {
+  if (["timestamp", "formId"].includes(fieldId)) continue;
 
-      // Parse Firestore mapValue containing {label, value}
-      if (val.mapValue && val.mapValue.fields) {
-        const label = val.mapValue.fields.label?.stringValue || fieldId;
-        let value = val.mapValue.fields.value?.stringValue || "";
+  if (val.mapValue && val.mapValue.fields) {
+    const label = val.mapValue.fields.label?.stringValue || fieldId;
+    const fieldValue = val.mapValue.fields.value;
 
-        // Handle other data types if needed
-        if (!value) {
-          value =
-            val.mapValue.fields.value?.integerValue ||
-            val.mapValue.fields.value?.doubleValue ||
-            val.mapValue.fields.value?.booleanValue ||
-            JSON.stringify(val.mapValue.fields.value);
-        }
+    let value = "—";
 
-        emailBody.push(`<p><strong>${label}:</strong> ${value}</p>`);
-      } else {
-        // Fallback (shouldn't normally happen)
-        const value =
-          val.stringValue ||
-          val.integerValue ||
-          val.doubleValue ||
-          val.booleanValue ||
-          JSON.stringify(val);
-        emailBody.push(`<p><strong>${fieldId}:</strong> ${value}</p>`);
-      }
+    if (fieldValue?.stringValue !== undefined && fieldValue?.stringValue !== null) {
+      value = (fieldValue.stringValue || "").trim() || "—";
+    } else if (fieldValue?.arrayValue !== undefined) {
+      const arr = fieldValue.arrayValue.values || [];
+      const joined = arr
+        .map(item =>
+          item.stringValue ||
+          item.integerValue ||
+          item.doubleValue ||
+          (item.booleanValue !== undefined ? (item.booleanValue ? "Yes" : "No") : "")
+        )
+        .filter(v => v !== "")
+        .join(", ");
+      value = joined || "—";
+    } else if (fieldValue?.mapValue !== undefined) {
+      // Handle Firestore mapValue for checkbox arrays saved as object
+      const vals = Object.values(fieldValue.mapValue.fields || {})
+        .map(item => item.stringValue || "")
+        .filter(v => v !== "");
+      value = vals.length ? vals.join(", ") : "—";
+    } else if (fieldValue?.integerValue !== undefined) {
+      value = fieldValue.integerValue.toString();
+    } else if (fieldValue?.doubleValue !== undefined) {
+      value = fieldValue.doubleValue.toString();
+    } else if (fieldValue?.booleanValue !== undefined) {
+      value = fieldValue.booleanValue ? "Yes" : "No";
     }
+
+    emailBody.push(`<p><strong>${label}:</strong> ${value}</p>`);
+  } else {
+    const value =
+      val.stringValue ||
+      val.integerValue ||
+      val.doubleValue ||
+      (val.booleanValue !== undefined ? (val.booleanValue ? "Yes" : "No") : "—");
+    emailBody.push(`<p><strong>${fieldId}:</strong> ${value}</p>`);
+  }
+}
+    
 
     const leadHTML = emailBody.join("");
 
@@ -103,7 +122,7 @@ export const sendLeadEmail = onDocumentCreated(
       const response = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${RESEND_API_KEY.value()}`,
+          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
