@@ -156,43 +156,54 @@ app.post("/webhook", (req, res) => {
     bizRef
       .where("stripeCustomerId", "==", customerId)
       .get()
-      .then(snapshot => {
+      .then(async snapshot => {
         if (snapshot.empty) {
           console.warn("⚠️ No Firestore business found for customerId:", customerId);
           return;
         }
   
-        snapshot.forEach(async doc => {
+        for (const doc of snapshot.docs) {
           try {
             await doc.ref.set({ isActive: false }, { merge: true });
             console.log(`🚫 isActive set to false for business: ${doc.id}`);
           } catch (err) {
             console.error("❌ Error updating Firestore doc:", err);
           }
-        });
+        }
       })
       .catch(err => {
         console.error("❌ Firestore query failed:", err);
       });
   }
   
-  
   if (event.type === "invoice.payment_failed") {
     const invoice = event.data.object;
     const customerId = invoice.customer;
+  
+    console.log("📩 Received invoice.payment_failed for customerId:", customerId);
   
     const bizRef = db.collection("businesses");
     bizRef
       .where("stripeCustomerId", "==", customerId)
       .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          doc.ref.set({ isActive: false }, { merge: true });
-          console.log(`🚫 Deactivated user ${doc.id} after payment failure`);
-        });
+      .then(async snapshot => {
+        if (snapshot.empty) {
+          console.warn("⚠️ No Firestore business found for customerId:", customerId);
+          return;
+        }
+  
+        for (const doc of snapshot.docs) {
+          try {
+            await doc.ref.set({ isActive: false }, { merge: true });
+            console.log(`🚫 Deactivated user ${doc.id} after payment failure`);
+          } catch (err) {
+            console.error("❌ Error updating Firestore doc:", err);
+          }
+        }
       })
-      .catch(err => console.error("❌ Error updating isActive:", err));
+      .catch(err => console.error("❌ Firestore query failed:", err));
   }
+  
   
 
   res.status(200).send("OK");
