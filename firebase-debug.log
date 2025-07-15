@@ -1,0 +1,431 @@
+[debug] [2025-07-14T12:51:32.187Z] ----------------------------------------------------------------------
+[debug] [2025-07-14T12:51:32.192Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy --only functions:sendLeadEmail --project ai-agent-staging-2f393
+[debug] [2025-07-14T12:51:32.192Z] CLI Version:   14.6.0
+[debug] [2025-07-14T12:51:32.192Z] Platform:      darwin
+[debug] [2025-07-14T12:51:32.192Z] Node Version:  v22.15.1
+[debug] [2025-07-14T12:51:32.192Z] Time:          Mon Jul 14 2025 08:51:32 GMT-0400 (Eastern Daylight Time)
+[debug] [2025-07-14T12:51:32.192Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-14T12:51:32.267Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-14T12:51:32.267Z] > authorizing via signed-in user (bryankahl28@gmail.com)
+[debug] [2025-07-14T12:51:32.267Z] [iam] checking project ai-agent-staging-2f393 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2025-07-14T12:51:32.268Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:32.268Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:32.268Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393:testIamPermissions [none]
+[debug] [2025-07-14T12:51:32.268Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393:testIamPermissions x-goog-quota-user=projects/ai-agent-staging-2f393
+[debug] [2025-07-14T12:51:32.268Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-07-14T12:51:32.545Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393:testIamPermissions 200
+[debug] [2025-07-14T12:51:32.546Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-07-14T12:51:32.546Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:32.546Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:32.546Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/ai-agent-staging-2f393/serviceAccounts/ai-agent-staging-2f393@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-07-14T12:51:32.546Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/ai-agent-staging-2f393/serviceAccounts/ai-agent-staging-2f393@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-07-14T12:51:32.803Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/ai-agent-staging-2f393/serviceAccounts/ai-agent-staging-2f393@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2025-07-14T12:51:32.803Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/ai-agent-staging-2f393/serviceAccounts/ai-agent-staging-2f393@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'ai-agent-staging-2f393'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script. 
+[debug] [2025-07-14T12:51:32.974Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:32.974Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:32.974Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudresourcemanager.googleapis.com [none]
+[debug] [2025-07-14T12:51:32.974Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudresourcemanager.googleapis.com x-goog-quota-user=projects/ai-agent-staging-2f393
+[debug] [2025-07-14T12:51:33.502Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudresourcemanager.googleapis.com 200
+[debug] [2025-07-14T12:51:33.503Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudresourcemanager.googleapis.com [omitted]
+[debug] [2025-07-14T12:51:33.503Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:33.503Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:33.503Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393 [none]
+[debug] [2025-07-14T12:51:33.611Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393 200
+[debug] [2025-07-14T12:51:33.611Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393 {"projectNumber":"289574943955","projectId":"ai-agent-staging-2f393","lifecycleState":"ACTIVE","name":"AI Agent Staging","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-07-12T02:23:23.397753Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[debug] [2025-07-14T12:51:33.611Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:33.611Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:33.611Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:33.611Z] Checked if tokens are valid: true, expires at: 1752500523785
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[debug] [2025-07-14T12:51:33.611Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:33.612Z] Checked if tokens are valid: true, expires at: 1752500523785
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2025-07-14T12:51:33.612Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:33.612Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:33.612Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudfunctions.googleapis.com [none]
+[debug] [2025-07-14T12:51:33.612Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/ai-agent-staging-2f393
+[debug] [2025-07-14T12:51:33.612Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/runtimeconfig.googleapis.com [none]
+[debug] [2025-07-14T12:51:33.612Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/ai-agent-staging-2f393
+[debug] [2025-07-14T12:51:33.613Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudbuild.googleapis.com [none]
+[debug] [2025-07-14T12:51:33.613Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudbuild.googleapis.com x-goog-quota-user=projects/ai-agent-staging-2f393
+[debug] [2025-07-14T12:51:33.613Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/artifactregistry.googleapis.com [none]
+[debug] [2025-07-14T12:51:33.613Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/artifactregistry.googleapis.com x-goog-quota-user=projects/ai-agent-staging-2f393
+[debug] [2025-07-14T12:51:33.990Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudfunctions.googleapis.com 200
+[debug] [2025-07-14T12:51:33.990Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudfunctions.googleapis.com [omitted]
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2025-07-14T12:51:34.025Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/artifactregistry.googleapis.com 200
+[debug] [2025-07-14T12:51:34.025Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/artifactregistry.googleapis.com [omitted]
+[info] ✔  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2025-07-14T12:51:34.027Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/runtimeconfig.googleapis.com 200
+[debug] [2025-07-14T12:51:34.027Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2025-07-14T12:51:34.045Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudbuild.googleapis.com 200
+[debug] [2025-07-14T12:51:34.045Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudbuild.googleapis.com [omitted]
+[info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2025-07-14T12:51:34.045Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:34.045Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:34.045Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ai-agent-staging-2f393/adminSdkConfig [none]
+[debug] [2025-07-14T12:51:34.514Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ai-agent-staging-2f393/adminSdkConfig 200
+[debug] [2025-07-14T12:51:34.514Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ai-agent-staging-2f393/adminSdkConfig {"projectId":"ai-agent-staging-2f393","storageBucket":"ai-agent-staging-2f393.firebasestorage.app"}
+[debug] [2025-07-14T12:51:34.515Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:34.515Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:34.515Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/ai-agent-staging-2f393/configs [none]
+[debug] [2025-07-14T12:51:34.732Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/ai-agent-staging-2f393/configs 200
+[debug] [2025-07-14T12:51:34.732Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/ai-agent-staging-2f393/configs {}
+[debug] [2025-07-14T12:51:34.733Z] Validating nodejs source
+[debug] [2025-07-14T12:51:35.118Z] > [functions] package.json contents: {
+  "name": "functions",
+  "type": "module",
+  "description": "Cloud Functions for Firebase",
+  "main": "index.js",
+  "private": true,
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "lint": "echo 'Skipping lint...'",
+    "deploy": "firebase deploy --only functions",
+    "serve": "firebase emulators:start --only functions"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.3.2",
+    "googleapis": "^150.0.1",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^7.0.4"
+  }
+}
+[debug] [2025-07-14T12:51:35.119Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2025-07-14T12:51:35.119Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-07-14T12:51:35.123Z] Found firebase-functions binary at '/Users/bryankahl/Desktop/homebase-stripe-backend-staging/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8496
+
+[debug] [2025-07-14T12:51:35.336Z] Got response from /__/functions.yaml {"endpoints":{"sendLeadEmail":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"secretEnvironmentVariables":[{"key":"RESEND_API_KEY"}],"labels":{},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.created","eventFilters":{"database":"(default)","namespace":"(default)"},"eventFilterPathPatterns":{"document":"businesses/{businessId}/leads/{leadId}"},"retry":false},"entryPoint":"sendLeadEmail"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{},"params":[{"type":"secret","name":"RESEND_API_KEY"}]}
+[info] i  extensions: ensuring required API firebaseextensions.googleapis.com is enabled... 
+[debug] [2025-07-14T12:51:39.359Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:39.359Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:39.359Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/firebaseextensions.googleapis.com [none]
+[debug] [2025-07-14T12:51:39.359Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/firebaseextensions.googleapis.com x-goog-quota-user=projects/ai-agent-staging-2f393
+[debug] [2025-07-14T12:51:39.741Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/firebaseextensions.googleapis.com 200
+[debug] [2025-07-14T12:51:39.742Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/firebaseextensions.googleapis.com [omitted]
+[info] ✔  extensions: required API firebaseextensions.googleapis.com is enabled 
+[debug] [2025-07-14T12:51:39.742Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-14T12:51:39.742Z] > authorizing via signed-in user (bryankahl28@gmail.com)
+[debug] [2025-07-14T12:51:39.742Z] [iam] checking project ai-agent-staging-2f393 for permissions ["firebase.projects.get","firebaseextensions.instances.list"]
+[debug] [2025-07-14T12:51:39.742Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:39.742Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:39.742Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393:testIamPermissions [none]
+[debug] [2025-07-14T12:51:39.742Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393:testIamPermissions x-goog-quota-user=projects/ai-agent-staging-2f393
+[debug] [2025-07-14T12:51:39.742Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2025-07-14T12:51:39.981Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393:testIamPermissions 200
+[debug] [2025-07-14T12:51:39.982Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2025-07-14T12:51:39.982Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:39.982Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:39.983Z] >>> [apiv2][query] GET https://firebaseextensions.googleapis.com/v1beta/projects/ai-agent-staging-2f393/instances pageSize=100&pageToken=
+[debug] [2025-07-14T12:51:40.317Z] <<< [apiv2][status] GET https://firebaseextensions.googleapis.com/v1beta/projects/ai-agent-staging-2f393/instances 200
+[debug] [2025-07-14T12:51:40.317Z] <<< [apiv2][body] GET https://firebaseextensions.googleapis.com/v1beta/projects/ai-agent-staging-2f393/instances {}
+[debug] [2025-07-14T12:51:40.318Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:40.318Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:51:40.318Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY [none]
+[debug] [2025-07-14T12:51:40.514Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY 404
+[debug] [2025-07-14T12:51:40.514Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY {"error":{"code":404,"message":"Secret [projects/289574943955/secrets/RESEND_API_KEY] not found.","status":"NOT_FOUND"}}
+[debug] [2025-07-14T12:52:47.196Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:47.197Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:47.197Z] >>> [apiv2][query] POST https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets secretId=RESEND_API_KEY
+[debug] [2025-07-14T12:52:47.197Z] >>> [apiv2][body] POST https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets {"name":"RESEND_API_KEY","replication":{"automatic":{}},"labels":{"firebase-managed":"functions"}}
+[debug] [2025-07-14T12:52:47.811Z] <<< [apiv2][status] POST https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets 200
+[debug] [2025-07-14T12:52:47.811Z] <<< [apiv2][body] POST https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets {"name":"projects/289574943955/secrets/RESEND_API_KEY","replication":{"automatic":{}},"createTime":"2025-07-14T12:52:47.441751Z","labels":{"firebase-managed":"functions"},"etag":"\"1639e322ffd21a\""}
+[debug] [2025-07-14T12:52:47.812Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:47.812Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:47.812Z] >>> [apiv2][query] POST https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY:addVersion [none]
+[debug] [2025-07-14T12:52:47.812Z] >>> [apiv2][body] POST https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY:addVersion {"payload":{"data":"cmVfZThZZ3pSRjJfNzVOMnZNNnBvQXN2aFdMSHRKenl1a2ZE"}}
+[debug] [2025-07-14T12:52:48.288Z] <<< [apiv2][status] POST https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY:addVersion 200
+[debug] [2025-07-14T12:52:48.288Z] <<< [apiv2][body] POST https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY:addVersion {"name":"projects/289574943955/secrets/RESEND_API_KEY/versions/1","createTime":"2025-07-14T12:52:48.280146Z","state":"ENABLED","replicationStatus":{"automatic":{}},"etag":"\"1639e32306ee52\""}
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged /Users/bryankahl/Desktop/homebase-stripe-backend-staging/functions (34.1 KB) for uploading 
+[debug] [2025-07-14T12:52:48.308Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:48.308Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:48.308Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/ai-agent-staging-2f393/locations/-/functions [none]
+[debug] [2025-07-14T12:52:48.922Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/ai-agent-staging-2f393/locations/-/functions 200
+[debug] [2025-07-14T12:52:48.922Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/ai-agent-staging-2f393/locations/-/functions {}
+[debug] [2025-07-14T12:52:48.922Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:48.922Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:48.923Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/ai-agent-staging-2f393/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2025-07-14T12:52:49.425Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/ai-agent-staging-2f393/locations/-/functions 200
+[debug] [2025-07-14T12:52:49.426Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/ai-agent-staging-2f393/locations/-/functions {}
+[debug] [2025-07-14T12:52:49.427Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:49.427Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:49.427Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/ai-agent-staging-2f393/databases/(default) [none]
+[debug] [2025-07-14T12:52:49.894Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/ai-agent-staging-2f393/databases/(default) 200
+[debug] [2025-07-14T12:52:49.894Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/ai-agent-staging-2f393/databases/(default) {"name":"projects/ai-agent-staging-2f393/databases/(default)","uid":"a8133f6a-574e-4e7e-9435-ba7a18ddaa3e","createTime":"2025-07-12T03:17:30.479511Z","updateTime":"2025-07-12T03:17:30.479511Z","locationId":"nam5","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2025-07-14T11:52:49.864875Z","appEngineIntegrationMode":"DISABLED","keyPrefix":"s","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","databaseEdition":"STANDARD","freeTier":true,"etag":"IM+0/JiyvI4DMMKO6Oauto4D"}
+[info] i  functions: ensuring required API run.googleapis.com is enabled... 
+[debug] [2025-07-14T12:52:49.895Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:49.895Z] Checked if tokens are valid: true, expires at: 1752500523785
+[info] i  functions: ensuring required API eventarc.googleapis.com is enabled... 
+[debug] [2025-07-14T12:52:49.896Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:49.896Z] Checked if tokens are valid: true, expires at: 1752500523785
+[info] i  functions: ensuring required API pubsub.googleapis.com is enabled... 
+[debug] [2025-07-14T12:52:49.896Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:49.896Z] Checked if tokens are valid: true, expires at: 1752500523785
+[info] i  functions: ensuring required API storage.googleapis.com is enabled... 
+[debug] [2025-07-14T12:52:49.896Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:49.896Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:49.896Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/run.googleapis.com [none]
+[debug] [2025-07-14T12:52:49.896Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/run.googleapis.com x-goog-quota-user=projects/289574943955
+[debug] [2025-07-14T12:52:49.898Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/eventarc.googleapis.com [none]
+[debug] [2025-07-14T12:52:49.898Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/eventarc.googleapis.com x-goog-quota-user=projects/289574943955
+[debug] [2025-07-14T12:52:49.899Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/pubsub.googleapis.com [none]
+[debug] [2025-07-14T12:52:49.899Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/pubsub.googleapis.com x-goog-quota-user=projects/289574943955
+[debug] [2025-07-14T12:52:49.900Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/storage.googleapis.com [none]
+[debug] [2025-07-14T12:52:49.900Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/storage.googleapis.com x-goog-quota-user=projects/289574943955
+[debug] [2025-07-14T12:52:50.321Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/eventarc.googleapis.com 200
+[debug] [2025-07-14T12:52:50.321Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/eventarc.googleapis.com [omitted]
+[warn] ⚠  functions: missing required API eventarc.googleapis.com. Enabling now... 
+[debug] [2025-07-14T12:52:50.322Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:50.322Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:50.322Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/289574943955/services/eventarc.googleapis.com:enable [none]
+[debug] [2025-07-14T12:52:50.322Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/289574943955/services/eventarc.googleapis.com:enable x-goog-quota-user=projects/289574943955
+[debug] [2025-07-14T12:52:50.323Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/storage.googleapis.com 200
+[debug] [2025-07-14T12:52:50.323Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/storage.googleapis.com [omitted]
+[info] ✔  functions: required API storage.googleapis.com is enabled 
+[debug] [2025-07-14T12:52:50.347Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/pubsub.googleapis.com 200
+[debug] [2025-07-14T12:52:50.348Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/pubsub.googleapis.com [omitted]
+[info] ✔  functions: required API pubsub.googleapis.com is enabled 
+[debug] [2025-07-14T12:52:50.348Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/run.googleapis.com 200
+[debug] [2025-07-14T12:52:50.349Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/run.googleapis.com [omitted]
+[warn] ⚠  functions: missing required API run.googleapis.com. Enabling now... 
+[debug] [2025-07-14T12:52:50.349Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:50.349Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:52:50.349Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/289574943955/services/run.googleapis.com:enable [none]
+[debug] [2025-07-14T12:52:50.349Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/289574943955/services/run.googleapis.com:enable x-goog-quota-user=projects/289574943955
+[debug] [2025-07-14T12:52:51.081Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/289574943955/services/run.googleapis.com:enable 200
+[debug] [2025-07-14T12:52:51.082Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/289574943955/services/run.googleapis.com:enable [omitted]
+[debug] [2025-07-14T12:52:51.152Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/289574943955/services/eventarc.googleapis.com:enable 200
+[debug] [2025-07-14T12:52:51.152Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/289574943955/services/eventarc.googleapis.com:enable [omitted]
+[debug] [2025-07-14T12:53:01.082Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:01.083Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:01.083Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/run.googleapis.com [none]
+[debug] [2025-07-14T12:53:01.083Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/run.googleapis.com x-goog-quota-user=projects/289574943955
+[debug] [2025-07-14T12:53:01.153Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:01.154Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:01.154Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/eventarc.googleapis.com [none]
+[debug] [2025-07-14T12:53:01.154Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/eventarc.googleapis.com x-goog-quota-user=projects/289574943955
+[debug] [2025-07-14T12:53:01.493Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/run.googleapis.com 200
+[debug] [2025-07-14T12:53:01.493Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/run.googleapis.com [omitted]
+[info] ✔  functions: required API run.googleapis.com is enabled 
+[debug] [2025-07-14T12:53:01.593Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/eventarc.googleapis.com 200
+[debug] [2025-07-14T12:53:01.593Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/eventarc.googleapis.com [omitted]
+[info] ✔  functions: required API eventarc.googleapis.com is enabled 
+[info] i  functions: generating the service identity for pubsub.googleapis.com... 
+[debug] [2025-07-14T12:53:01.595Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:01.595Z] Checked if tokens are valid: true, expires at: 1752500523785
+[info] i  functions: generating the service identity for eventarc.googleapis.com... 
+[debug] [2025-07-14T12:53:01.595Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:01.595Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:01.595Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/289574943955/services/pubsub.googleapis.com:generateServiceIdentity [none]
+[debug] [2025-07-14T12:53:01.595Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/289574943955/services/eventarc.googleapis.com:generateServiceIdentity [none]
+[debug] [2025-07-14T12:53:02.076Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/289574943955/services/eventarc.googleapis.com:generateServiceIdentity 200
+[debug] [2025-07-14T12:53:02.076Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/289574943955/services/eventarc.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-289574943955@gcp-sa-eventarc.iam.gserviceaccount.com","uniqueId":"117475665519782466853"}}
+[debug] [2025-07-14T12:53:02.148Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/289574943955/services/pubsub.googleapis.com:generateServiceIdentity 200
+[debug] [2025-07-14T12:53:02.148Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/289574943955/services/pubsub.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-289574943955@gcp-sa-pubsub.iam.gserviceaccount.com","uniqueId":"106081205070909662914"}}
+[info] i  functions: ensuring required API secretmanager.googleapis.com is enabled... 
+[debug] [2025-07-14T12:53:02.148Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:02.148Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:02.148Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/secretmanager.googleapis.com [none]
+[debug] [2025-07-14T12:53:02.149Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/secretmanager.googleapis.com x-goog-quota-user=projects/289574943955
+[debug] [2025-07-14T12:53:02.441Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/secretmanager.googleapis.com 200
+[debug] [2025-07-14T12:53:02.441Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/289574943955/services/secretmanager.googleapis.com [omitted]
+[info] ✔  functions: required API secretmanager.googleapis.com is enabled 
+[debug] [2025-07-14T12:53:02.442Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:02.442Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:02.442Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY/versions/latest [none]
+[debug] [2025-07-14T12:53:02.653Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY/versions/latest 200
+[debug] [2025-07-14T12:53:02.654Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY/versions/latest {"name":"projects/289574943955/secrets/RESEND_API_KEY/versions/1","createTime":"2025-07-14T12:52:48.280146Z","state":"ENABLED","replicationStatus":{"automatic":{}},"etag":"\"1639e32306ee52\""}
+[debug] [2025-07-14T12:53:02.654Z] Resolved secret version of RESEND_API_KEY to 1.
+[debug] [2025-07-14T12:53:02.655Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:02.655Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:02.655Z] >>> [apiv2][query] GET https://compute.googleapis.com/compute/v1/projects/289574943955 [none]
+[debug] [2025-07-14T12:53:02.902Z] <<< [apiv2][status] GET https://compute.googleapis.com/compute/v1/projects/289574943955 403
+[debug] [2025-07-14T12:53:02.902Z] <<< [apiv2][body] GET https://compute.googleapis.com/compute/v1/projects/289574943955 {"error":{"code":403,"message":"Compute Engine API has not been used in project 289574943955 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","errors":[{"message":"Compute Engine API has not been used in project 289574943955 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","domain":"usageLimits","reason":"accessNotConfigured","extendedHelp":"https://console.developers.google.com"}],"status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"serviceTitle":"Compute Engine API","containerInfo":"289574943955","activationUrl":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955","service":"compute.googleapis.com","consumer":"projects/289574943955"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Compute Engine API has not been used in project 289574943955 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955"}]}]}}
+[debug] [2025-07-14T12:53:02.902Z] unable to look up default compute service account. Falling back to 289574943955-compute@developer.gserviceaccount.com. Error: {"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"Compute Engine API has not been used in project 289574943955 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","errors":[{"message":"Compute Engine API has not been used in project 289574943955 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","domain":"usageLimits","reason":"accessNotConfigured","extendedHelp":"https://console.developers.google.com"}],"status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"serviceTitle":"Compute Engine API","containerInfo":"289574943955","activationUrl":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955","service":"compute.googleapis.com","consumer":"projects/289574943955"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Compute Engine API has not been used in project 289574943955 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955"}]}]}},"response":{"statusCode":403}},"exit":1,"message":"Request to https://compute.googleapis.com/compute/v1/projects/289574943955 had HTTP Error: 403, Compute Engine API has not been used in project 289574943955 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","status":403}
+[debug] [2025-07-14T12:53:02.902Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:02.902Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:02.902Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/289574943955:getIamPolicy [none]
+[debug] [2025-07-14T12:53:03.216Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/289574943955:getIamPolicy 200
+[debug] [2025-07-14T12:53:03.216Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/289574943955:getIamPolicy {"version":1,"etag":"BwY54yN4P9M=","bindings":[{"role":"roles/cloudbuild.builds.builder","members":["serviceAccount:289574943955@cloudbuild.gserviceaccount.com"]},{"role":"roles/cloudbuild.serviceAgent","members":["serviceAccount:service-289574943955@gcp-sa-cloudbuild.iam.gserviceaccount.com"]},{"role":"roles/cloudfunctions.serviceAgent","members":["serviceAccount:service-289574943955@gcf-admin-robot.iam.gserviceaccount.com"]},{"role":"roles/containerregistry.ServiceAgent","members":["serviceAccount:service-289574943955@containerregistry.iam.gserviceaccount.com"]},{"role":"roles/editor","members":["serviceAccount:289574943955@cloudservices.gserviceaccount.com","serviceAccount:ai-agent-staging-2f393@appspot.gserviceaccount.com","serviceAccount:289574943955-compute@developer.gserviceaccount.com"]},{"role":"roles/firebase.managementServiceAgent","members":["serviceAccount:service-289574943955@gcp-sa-firebase.iam.gserviceaccount.com"]},{"role":"roles/firebase.sdkAdminServiceAgent","members":["serviceAccount:firebase-adminsdk-fbsvc@ai-agent-staging-2f393.iam.gserviceaccount.com"]},{"role":"roles/firebaseauth.admin","members":["serviceAccount:firebase-adminsdk-fbsvc@ai-agent-staging-2f393.iam.gserviceaccount.com"]},{"role":"roles/firebasemods.serviceAgent","members":["serviceAccount:service-289574943955@gcp-sa-firebasemods.iam.gserviceaccount.com"]},{"role":"roles/firebaserules.system","members":["serviceAccount:service-289574943955@firebase-rules.iam.gserviceaccount.com"]},{"role":"roles/firestore.serviceAgent","members":["serviceAccount:service-289574943955@gcp-sa-firestore.iam.gserviceaccount.com"]},{"role":"roles/iam.serviceAccountTokenCreator","members":["serviceAccount:firebase-adminsdk-fbsvc@ai-agent-staging-2f393.iam.gserviceaccount.com"]},{"role":"roles/owner","members":["user:bryankahl28@gmail.com"]},{"role":"roles/run.serviceAgent","members":["serviceAccount:service-289574943955@serverless-robot-prod.iam.gserviceaccount.com"]}]}
+[debug] [2025-07-14T12:53:03.217Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:03.217Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:03.217Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/289574943955:setIamPolicy [none]
+[debug] [2025-07-14T12:53:03.217Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/289574943955:setIamPolicy {"policy":{"version":1,"etag":"BwY54yN4P9M=","bindings":[{"role":"roles/cloudbuild.builds.builder","members":["serviceAccount:289574943955@cloudbuild.gserviceaccount.com"]},{"role":"roles/cloudbuild.serviceAgent","members":["serviceAccount:service-289574943955@gcp-sa-cloudbuild.iam.gserviceaccount.com"]},{"role":"roles/cloudfunctions.serviceAgent","members":["serviceAccount:service-289574943955@gcf-admin-robot.iam.gserviceaccount.com"]},{"role":"roles/containerregistry.ServiceAgent","members":["serviceAccount:service-289574943955@containerregistry.iam.gserviceaccount.com"]},{"role":"roles/editor","members":["serviceAccount:289574943955@cloudservices.gserviceaccount.com","serviceAccount:ai-agent-staging-2f393@appspot.gserviceaccount.com","serviceAccount:289574943955-compute@developer.gserviceaccount.com"]},{"role":"roles/firebase.managementServiceAgent","members":["serviceAccount:service-289574943955@gcp-sa-firebase.iam.gserviceaccount.com"]},{"role":"roles/firebase.sdkAdminServiceAgent","members":["serviceAccount:firebase-adminsdk-fbsvc@ai-agent-staging-2f393.iam.gserviceaccount.com"]},{"role":"roles/firebaseauth.admin","members":["serviceAccount:firebase-adminsdk-fbsvc@ai-agent-staging-2f393.iam.gserviceaccount.com"]},{"role":"roles/firebasemods.serviceAgent","members":["serviceAccount:service-289574943955@gcp-sa-firebasemods.iam.gserviceaccount.com"]},{"role":"roles/firebaserules.system","members":["serviceAccount:service-289574943955@firebase-rules.iam.gserviceaccount.com"]},{"role":"roles/firestore.serviceAgent","members":["serviceAccount:service-289574943955@gcp-sa-firestore.iam.gserviceaccount.com"]},{"role":"roles/iam.serviceAccountTokenCreator","members":["serviceAccount:firebase-adminsdk-fbsvc@ai-agent-staging-2f393.iam.gserviceaccount.com","serviceAccount:service-289574943955@gcp-sa-pubsub.iam.gserviceaccount.com"]},{"role":"roles/owner","members":["user:bryankahl28@gmail.com"]},{"role":"roles/run.serviceAgent","members":["serviceAccount:service-289574943955@serverless-robot-prod.iam.gserviceaccount.com"]},{"role":"roles/run.invoker","members":["serviceAccount:289574943955-compute@developer.gserviceaccount.com"]},{"role":"roles/eventarc.eventReceiver","members":["serviceAccount:289574943955-compute@developer.gserviceaccount.com"]}]},"updateMask":"bindings"}
+[debug] [2025-07-14T12:53:04.268Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/289574943955:setIamPolicy 200
+[debug] [2025-07-14T12:53:04.269Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/289574943955:setIamPolicy {"version":1,"etag":"BwY54yP658E=","bindings":[{"role":"roles/cloudbuild.builds.builder","members":["serviceAccount:289574943955@cloudbuild.gserviceaccount.com"]},{"role":"roles/cloudbuild.serviceAgent","members":["serviceAccount:service-289574943955@gcp-sa-cloudbuild.iam.gserviceaccount.com"]},{"role":"roles/cloudfunctions.serviceAgent","members":["serviceAccount:service-289574943955@gcf-admin-robot.iam.gserviceaccount.com"]},{"role":"roles/containerregistry.ServiceAgent","members":["serviceAccount:service-289574943955@containerregistry.iam.gserviceaccount.com"]},{"role":"roles/editor","members":["serviceAccount:289574943955-compute@developer.gserviceaccount.com","serviceAccount:289574943955@cloudservices.gserviceaccount.com","serviceAccount:ai-agent-staging-2f393@appspot.gserviceaccount.com"]},{"role":"roles/eventarc.eventReceiver","members":["serviceAccount:289574943955-compute@developer.gserviceaccount.com"]},{"role":"roles/firebase.managementServiceAgent","members":["serviceAccount:service-289574943955@gcp-sa-firebase.iam.gserviceaccount.com"]},{"role":"roles/firebase.sdkAdminServiceAgent","members":["serviceAccount:firebase-adminsdk-fbsvc@ai-agent-staging-2f393.iam.gserviceaccount.com"]},{"role":"roles/firebaseauth.admin","members":["serviceAccount:firebase-adminsdk-fbsvc@ai-agent-staging-2f393.iam.gserviceaccount.com"]},{"role":"roles/firebasemods.serviceAgent","members":["serviceAccount:service-289574943955@gcp-sa-firebasemods.iam.gserviceaccount.com"]},{"role":"roles/firebaserules.system","members":["serviceAccount:service-289574943955@firebase-rules.iam.gserviceaccount.com"]},{"role":"roles/firestore.serviceAgent","members":["serviceAccount:service-289574943955@gcp-sa-firestore.iam.gserviceaccount.com"]},{"role":"roles/iam.serviceAccountTokenCreator","members":["serviceAccount:firebase-adminsdk-fbsvc@ai-agent-staging-2f393.iam.gserviceaccount.com","serviceAccount:service-289574943955@gcp-sa-pubsub.iam.gserviceaccount.com"]},{"role":"roles/owner","members":["user:bryankahl28@gmail.com"]},{"role":"roles/run.invoker","members":["serviceAccount:289574943955-compute@developer.gserviceaccount.com"]},{"role":"roles/run.serviceAgent","members":["serviceAccount:service-289574943955@serverless-robot-prod.iam.gserviceaccount.com"]}]}
+[debug] [2025-07-14T12:53:04.269Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:04.269Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:04.269Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudresourcemanager.googleapis.com [none]
+[debug] [2025-07-14T12:53:04.269Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudresourcemanager.googleapis.com x-goog-quota-user=projects/ai-agent-staging-2f393
+[debug] [2025-07-14T12:53:04.548Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudresourcemanager.googleapis.com 200
+[debug] [2025-07-14T12:53:04.549Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/ai-agent-staging-2f393/services/cloudresourcemanager.googleapis.com [omitted]
+[debug] [2025-07-14T12:53:04.549Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:04.549Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:04.549Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393 [none]
+[debug] [2025-07-14T12:53:04.677Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393 200
+[debug] [2025-07-14T12:53:04.677Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/ai-agent-staging-2f393 {"projectNumber":"289574943955","projectId":"ai-agent-staging-2f393","lifecycleState":"ACTIVE","name":"AI Agent Staging","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-07-12T02:23:23.397753Z"}
+[debug] [2025-07-14T12:53:04.677Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:04.677Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:04.678Z] >>> [apiv2][query] GET https://compute.googleapis.com/compute/v1/projects/289574943955 [none]
+[debug] [2025-07-14T12:53:04.746Z] <<< [apiv2][status] GET https://compute.googleapis.com/compute/v1/projects/289574943955 403
+[debug] [2025-07-14T12:53:04.746Z] <<< [apiv2][body] GET https://compute.googleapis.com/compute/v1/projects/289574943955 {"error":{"code":403,"message":"Compute Engine API has not been used in project 289574943955 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","errors":[{"message":"Compute Engine API has not been used in project 289574943955 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","domain":"usageLimits","reason":"accessNotConfigured","extendedHelp":"https://console.developers.google.com"}],"status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"service":"compute.googleapis.com","containerInfo":"289574943955","activationUrl":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955","serviceTitle":"Compute Engine API","consumer":"projects/289574943955"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Compute Engine API has not been used in project 289574943955 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955"}]}]}}
+[debug] [2025-07-14T12:53:04.747Z] unable to look up default compute service account. Falling back to 289574943955-compute@developer.gserviceaccount.com. Error: {"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"Compute Engine API has not been used in project 289574943955 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","errors":[{"message":"Compute Engine API has not been used in project 289574943955 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","domain":"usageLimits","reason":"accessNotConfigured","extendedHelp":"https://console.developers.google.com"}],"status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"service":"compute.googleapis.com","containerInfo":"289574943955","activationUrl":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955","serviceTitle":"Compute Engine API","consumer":"projects/289574943955"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Compute Engine API has not been used in project 289574943955 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955"}]}]}},"response":{"statusCode":403}},"exit":1,"message":"Request to https://compute.googleapis.com/compute/v1/projects/289574943955 had HTTP Error: 403, Compute Engine API has not been used in project 289574943955 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=289574943955 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","status":403}
+[info] i  functions: ensuring 289574943955-compute@developer.gserviceaccount.com access to secret RESEND_API_KEY. 
+[debug] [2025-07-14T12:53:04.747Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:04.747Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:04.747Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY:getIamPolicy [none]
+[debug] [2025-07-14T12:53:04.918Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY:getIamPolicy 200
+[debug] [2025-07-14T12:53:04.918Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY:getIamPolicy {"etag":"ACAB"}
+[debug] [2025-07-14T12:53:04.918Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:04.918Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:04.918Z] >>> [apiv2][query] POST https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY:setIamPolicy [none]
+[debug] [2025-07-14T12:53:04.918Z] >>> [apiv2][body] POST https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY:setIamPolicy {"policy":{"bindings":[{"role":"roles/secretmanager.secretAccessor","members":["serviceAccount:289574943955-compute@developer.gserviceaccount.com"]}]},"updateMask":"bindings"}
+[debug] [2025-07-14T12:53:05.317Z] <<< [apiv2][status] POST https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY:setIamPolicy 200
+[debug] [2025-07-14T12:53:05.317Z] <<< [apiv2][body] POST https://secretmanager.googleapis.com/v1/projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY:setIamPolicy {"version":1,"etag":"BwY54yQKx4k=","bindings":[{"role":"roles/secretmanager.secretAccessor","members":["serviceAccount:289574943955-compute@developer.gserviceaccount.com"]}]}
+[info] ✔  secretmanager: Granted roles/secretmanager.secretAccessor on projects/ai-agent-staging-2f393/secrets/RESEND_API_KEY to 289574943955-compute@developer.gserviceaccount.com 
+[info] ✔  functions: ensured 289574943955-compute@developer.gserviceaccount.com access to RESEND_API_KEY. 
+[debug] [2025-07-14T12:53:05.318Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:05.318Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:05.318Z] >>> [apiv2][query] GET https://cloudbilling.googleapis.com/v1/projects/ai-agent-staging-2f393/billingInfo [none]
+[debug] [2025-07-14T12:53:05.594Z] <<< [apiv2][status] GET https://cloudbilling.googleapis.com/v1/projects/ai-agent-staging-2f393/billingInfo 200
+[debug] [2025-07-14T12:53:05.594Z] <<< [apiv2][body] GET https://cloudbilling.googleapis.com/v1/projects/ai-agent-staging-2f393/billingInfo {"name":"projects/ai-agent-staging-2f393/billingInfo","projectId":"ai-agent-staging-2f393","billingAccountName":"billingAccounts/012079-7334CC-B35A1C","billingEnabled":true}
+[debug] [2025-07-14T12:53:05.595Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:05.595Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:05.595Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/ai-agent-staging-2f393/locations/us-central1/functions:generateUploadUrl [none]
+[debug] [2025-07-14T12:53:07.055Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/ai-agent-staging-2f393/locations/us-central1/functions:generateUploadUrl 200
+[debug] [2025-07-14T12:53:07.056Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/ai-agent-staging-2f393/locations/us-central1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/gcf-v2-uploads-289574943955.us-central1.cloudfunctions.appspot.com/3767f801-eaea-42e8-8eaf-56cd43bcacb9.zip?GoogleAccessId=service-289574943955@gcf-admin-robot.iam.gserviceaccount.com&Expires=1752499387&Signature=V1dD%2B8wn2UtOYlV9T7cZ8RfHP0PAm5VwO%2BK0nOGAKDqH1YiBeJF1%2Fj9RsM5mgkFuMLlbIQQIl%2BfI1xt0ir9TuWOeGCNHfPeyL0QjgxzeexsCicIwyXXXNCadJ4e6S%2FCbSQ8XX4sQAVVdr59TRmMF5HfFW34RqD3ikSy84DqVci67uYhL0lGMBDWCDFzwJvyfgXkRT8LoMN6PBMRLvsfzNfEaR8DNqgW3scAicja3eNJkO26gdRJT3gnEfo7wlF%2BvYF%2BGtkL6TkxVmoV%2FkEM282xZsRC%2BcM1h6D815y4BSoEX5xBLTNsvJfEWVRoYcpHkMqLKp%2FEa74puegmkRGNp%2BA%3D%3D","storageSource":{"bucket":"gcf-v2-uploads-289574943955.us-central1.cloudfunctions.appspot.com","object":"3767f801-eaea-42e8-8eaf-56cd43bcacb9.zip"}}
+[debug] [2025-07-14T12:53:07.057Z] >>> [apiv2][query] PUT https://storage.googleapis.com/gcf-v2-uploads-289574943955.us-central1.cloudfunctions.appspot.com/3767f801-eaea-42e8-8eaf-56cd43bcacb9.zip GoogleAccessId=service-289574943955%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1752499387&Signature=V1dD%2B8wn2UtOYlV9T7cZ8RfHP0PAm5VwO%2BK0nOGAKDqH1YiBeJF1%2Fj9RsM5mgkFuMLlbIQQIl%2BfI1xt0ir9TuWOeGCNHfPeyL0QjgxzeexsCicIwyXXXNCadJ4e6S%2FCbSQ8XX4sQAVVdr59TRmMF5HfFW34RqD3ikSy84DqVci67uYhL0lGMBDWCDFzwJvyfgXkRT8LoMN6PBMRLvsfzNfEaR8DNqgW3scAicja3eNJkO26gdRJT3gnEfo7wlF%2BvYF%2BGtkL6TkxVmoV%2FkEM282xZsRC%2BcM1h6D815y4BSoEX5xBLTNsvJfEWVRoYcpHkMqLKp%2FEa74puegmkRGNp%2BA%3D%3D
+[debug] [2025-07-14T12:53:07.057Z] >>> [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-289574943955.us-central1.cloudfunctions.appspot.com/3767f801-eaea-42e8-8eaf-56cd43bcacb9.zip [stream]
+[debug] [2025-07-14T12:53:07.366Z] <<< [apiv2][status] PUT https://storage.googleapis.com/gcf-v2-uploads-289574943955.us-central1.cloudfunctions.appspot.com/3767f801-eaea-42e8-8eaf-56cd43bcacb9.zip 200
+[debug] [2025-07-14T12:53:07.367Z] <<< [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-289574943955.us-central1.cloudfunctions.appspot.com/3767f801-eaea-42e8-8eaf-56cd43bcacb9.zip [omitted]
+[info] ✔  functions: functions folder uploaded successfully 
+[info] i  functions: creating Node.js 22 (2nd Gen) function sendLeadEmail(us-central1)... 
+[debug] [2025-07-14T12:53:07.370Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:07.370Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:07.371Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/ai-agent-staging-2f393/locations/us-central1/functions functionId=sendLeadEmail
+[debug] [2025-07-14T12:53:07.371Z] >>> [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/ai-agent-staging-2f393/locations/us-central1/functions {"name":"projects/ai-agent-staging-2f393/locations/us-central1/functions/sendLeadEmail","buildConfig":{"runtime":"nodejs22","entryPoint":"sendLeadEmail","source":{"storageSource":{"bucket":"gcf-v2-uploads-289574943955.us-central1.cloudfunctions.appspot.com","object":"3767f801-eaea-42e8-8eaf-56cd43bcacb9.zip"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}},"serviceConfig":{"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"ai-agent-staging-2f393\",\"storageBucket\":\"ai-agent-staging-2f393.firebasestorage.app\"}","GCLOUD_PROJECT":"ai-agent-staging-2f393","EVENTARC_CLOUD_EVENT_SOURCE":"projects/ai-agent-staging-2f393/locations/us-central1/services/sendLeadEmail","FUNCTION_SIGNATURE_TYPE":"cloudevent","FUNCTION_TARGET":"sendLeadEmail","LOG_EXECUTION_ID":"true"},"secretEnvironmentVariables":[{"key":"RESEND_API_KEY","secret":"RESEND_API_KEY","projectId":"ai-agent-staging-2f393","version":"1"}],"ingressSettings":null,"timeoutSeconds":null,"serviceAccountEmail":null,"availableMemory":"256Mi","minInstanceCount":null,"maxInstanceCount":null,"maxInstanceRequestConcurrency":80,"availableCpu":"1","vpcConnector":null,"vpcConnectorEgressSettings":null},"labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"79c35b629d0a01dc5aa2c2d2bcb6313a010c5633"},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.created","retryPolicy":"RETRY_POLICY_DO_NOT_RETRY","eventFilters":[{"attribute":"database","value":"(default)"},{"attribute":"namespace","value":"(default)"},{"attribute":"document","value":"businesses/{businessId}/leads/{leadId}","operator":"match-path-pattern"}],"triggerRegion":"nam5"}}
+[debug] [2025-07-14T12:53:23.550Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/ai-agent-staging-2f393/locations/us-central1/functions 400
+[debug] [2025-07-14T12:53:23.550Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/ai-agent-staging-2f393/locations/us-central1/functions {"error":{"code":400,"message":"Validation failed for trigger projects/ai-agent-staging-2f393/locations/nam5/triggers/sendleademail-490404: Invalid resource state for \"\": Permission denied while using the Eventarc Service Agent. If you recently started to use Eventarc, it may take a few minutes before all necessary permissions are propagated to the Service Agent. Otherwise, verify that it has Eventarc Service Agent role.","status":"FAILED_PRECONDITION"}}
+[warn] ⚠  functions: Request to https://cloudfunctions.googleapis.com/v2/projects/ai-agent-staging-2f393/locations/us-central1/functions?functionId=sendLeadEmail had HTTP Error: 400, Validation failed for trigger projects/ai-agent-staging-2f393/locations/nam5/triggers/sendleademail-490404: Invalid resource state for "": Permission denied while using the Eventarc Service Agent. If you recently started to use Eventarc, it may take a few minutes before all necessary permissions are propagated to the Service Agent. Otherwise, verify that it has Eventarc Service Agent role. 
+[warn] ⚠  functions: Since this is your first time using 2nd gen functions, we need a little bit longer to finish setting everything up. Retry the deployment in a few minutes. 
+[warn] ⚠  functions:  failed to create function projects/ai-agent-staging-2f393/locations/us-central1/functions/sendLeadEmail 
+[error] Failed to create function projects/ai-agent-staging-2f393/locations/us-central1/functions/sendLeadEmail
+[debug] [2025-07-14T12:53:23.557Z] Total Function Deployment time: 16183
+[debug] [2025-07-14T12:53:23.558Z] 1 Functions Deployed
+[debug] [2025-07-14T12:53:23.558Z] 1 Functions Errored
+[debug] [2025-07-14T12:53:23.558Z] 0 Function Deployments Aborted
+[debug] [2025-07-14T12:53:23.558Z] Average Function Deployment time: 16182
+[info] 
+[info] Functions deploy had errors with the following functions:
+	sendLeadEmail(us-central1)
+[debug] [2025-07-14T12:53:23.676Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:23.676Z] Checked if tokens are valid: true, expires at: 1752500523785
+[debug] [2025-07-14T12:53:23.677Z] >>> [apiv2][query] GET https://artifactregistry.googleapis.com/v1/projects/ai-agent-staging-2f393/locations/us-central1/repositories/gcf-artifacts [none]
+[debug] [2025-07-14T12:53:23.945Z] <<< [apiv2][status] GET https://artifactregistry.googleapis.com/v1/projects/ai-agent-staging-2f393/locations/us-central1/repositories/gcf-artifacts 404
+[debug] [2025-07-14T12:53:23.945Z] <<< [apiv2][body] GET https://artifactregistry.googleapis.com/v1/projects/ai-agent-staging-2f393/locations/us-central1/repositories/gcf-artifacts {"error":{"code":404,"message":"Requested entity was not found.","status":"NOT_FOUND"}}
+[debug] [2025-07-14T12:53:23.945Z] Failed to check artifact cleanup policy for region us-central1: Request to https://artifactregistry.googleapis.com/v1/projects/ai-agent-staging-2f393/locations/us-central1/repositories/gcf-artifacts had HTTP Error: 404, Requested entity was not found. {"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":404,"message":"Requested entity was not found.","status":"NOT_FOUND"}},"response":{"statusCode":404}},"exit":1,"message":"Request to https://artifactregistry.googleapis.com/v1/projects/ai-agent-staging-2f393/locations/us-central1/repositories/gcf-artifacts had HTTP Error: 404, Requested entity was not found.","status":404}
+[debug] [2025-07-14T12:53:23.945Z] Functions deploy failed.
+[debug] [2025-07-14T12:53:23.945Z] {
+  "endpoint": {
+    "id": "sendLeadEmail",
+    "project": "ai-agent-staging-2f393",
+    "region": "us-central1",
+    "entryPoint": "sendLeadEmail",
+    "platform": "gcfv2",
+    "runtime": "nodejs22",
+    "eventTrigger": {
+      "eventType": "google.cloud.firestore.document.v1.created",
+      "retry": false,
+      "eventFilters": {
+        "database": "(default)",
+        "namespace": "(default)"
+      },
+      "eventFilterPathPatterns": {
+        "document": "businesses/{businessId}/leads/{leadId}"
+      },
+      "region": "nam5"
+    },
+    "labels": {
+      "deployment-tool": "cli-firebase"
+    },
+    "secretEnvironmentVariables": [
+      {
+        "key": "RESEND_API_KEY",
+        "secret": "RESEND_API_KEY",
+        "projectId": "ai-agent-staging-2f393",
+        "version": "1"
+      }
+    ],
+    "serviceAccount": null,
+    "ingressSettings": null,
+    "availableMemoryMb": null,
+    "timeoutSeconds": null,
+    "maxInstances": null,
+    "minInstances": null,
+    "concurrency": 80,
+    "vpc": null,
+    "environmentVariables": {
+      "FIREBASE_CONFIG": "{\"projectId\":\"ai-agent-staging-2f393\",\"storageBucket\":\"ai-agent-staging-2f393.firebasestorage.app\"}",
+      "GCLOUD_PROJECT": "ai-agent-staging-2f393",
+      "EVENTARC_CLOUD_EVENT_SOURCE": "projects/ai-agent-staging-2f393/locations/us-central1/services/sendLeadEmail"
+    },
+    "codebase": "default",
+    "cpu": 1,
+    "targetedByOnly": true,
+    "hash": "79c35b629d0a01dc5aa2c2d2bcb6313a010c5633"
+  },
+  "op": "create",
+  "original": {
+    "name": "FirebaseError",
+    "children": [],
+    "context": {
+      "function": "projects/ai-agent-staging-2f393/locations/us-central1/functions/sendLeadEmail"
+    },
+    "exit": 1,
+    "message": "Failed to create function projects/ai-agent-staging-2f393/locations/us-central1/functions/sendLeadEmail",
+    "original": {
+      "name": "FirebaseError",
+      "children": [],
+      "context": {
+        "body": {
+          "error": {
+            "code": 400,
+            "message": "Validation failed for trigger projects/ai-agent-staging-2f393/locations/nam5/triggers/sendleademail-490404: Invalid resource state for \"\": Permission denied while using the Eventarc Service Agent. If you recently started to use Eventarc, it may take a few minutes before all necessary permissions are propagated to the Service Agent. Otherwise, verify that it has Eventarc Service Agent role.",
+            "status": "FAILED_PRECONDITION"
+          }
+        },
+        "response": {
+          "statusCode": 400
+        }
+      },
+      "exit": 1,
+      "message": "Request to https://cloudfunctions.googleapis.com/v2/projects/ai-agent-staging-2f393/locations/us-central1/functions?functionId=sendLeadEmail had HTTP Error: 400, Validation failed for trigger projects/ai-agent-staging-2f393/locations/nam5/triggers/sendleademail-490404: Invalid resource state for \"\": Permission denied while using the Eventarc Service Agent. If you recently started to use Eventarc, it may take a few minutes before all necessary permissions are propagated to the Service Agent. Otherwise, verify that it has Eventarc Service Agent role.",
+      "status": 400
+    },
+    "status": 400,
+    "code": 400
+  }
+}
+[debug] [2025-07-14T12:53:23.985Z] Error: Failed to create function sendLeadEmail in region us-central1
+    at /usr/local/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:294:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Fabricator.createV2Function (/usr/local/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:278:30)
+    at async Fabricator.createEndpoint (/usr/local/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:137:13)
+    at async handle (/usr/local/lib/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:89:17)
+[error] 
+[error] Error: There was an error deploying functions

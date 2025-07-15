@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "ai-agent-demo-9fe52"
-  }
+    "default": "ai-agent-demo-9fe52",
+    "staging": "ai-agent-staging-2f393"
+  },
+  "targets": {},
+  "etags": {}
 }
