@@ -129,6 +129,7 @@ app.post("/webhook", (req, res) => {
 
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    console.log("🔥 Stripe webhook triggered:", event.type); // ✅ ADD THIS LINE
   } catch (err) {
     console.error("⚠️ Webhook signature error:", err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
@@ -149,9 +150,9 @@ app.post("/webhook", (req, res) => {
   if (event.type === "customer.subscription.deleted") {
     const subscription = event.data.object;
     const customerId = subscription.customer;
-  
-    console.log("📩 Received subscription.deleted for customerId:", customerId);
-  
+
+    console.log("📩 Received subscription.deleted for customerId:", customerId); // ✅ YOU ALREADY HAVE THIS
+
     const bizRef = db.collection("businesses");
     bizRef
       .where("stripeCustomerId", "==", customerId)
@@ -161,7 +162,7 @@ app.post("/webhook", (req, res) => {
           console.warn("⚠️ No Firestore business found for customerId:", customerId);
           return;
         }
-  
+
         for (const doc of snapshot.docs) {
           try {
             await doc.ref.set({ isActive: false }, { merge: true });
@@ -175,13 +176,13 @@ app.post("/webhook", (req, res) => {
         console.error("❌ Firestore query failed:", err);
       });
   }
-  
+
   if (event.type === "invoice.payment_failed") {
     const invoice = event.data.object;
     const customerId = invoice.customer;
-  
+
     console.log("📩 Received invoice.payment_failed for customerId:", customerId);
-  
+
     const bizRef = db.collection("businesses");
     bizRef
       .where("stripeCustomerId", "==", customerId)
@@ -191,7 +192,7 @@ app.post("/webhook", (req, res) => {
           console.warn("⚠️ No Firestore business found for customerId:", customerId);
           return;
         }
-  
+
         for (const doc of snapshot.docs) {
           try {
             await doc.ref.set({ isActive: false }, { merge: true });
@@ -203,8 +204,6 @@ app.post("/webhook", (req, res) => {
       })
       .catch(err => console.error("❌ Firestore query failed:", err));
   }
-  
-  
 
   res.status(200).send("OK");
 });
